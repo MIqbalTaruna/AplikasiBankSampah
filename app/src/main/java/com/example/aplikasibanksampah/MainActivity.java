@@ -1,14 +1,14 @@
 package com.example.aplikasibanksampah;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 public class MainActivity extends AppCompatActivity {
-    private int waktu_loading = 3000;
-    // 1000ms = 1s
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,13 @@ public class MainActivity extends AppCompatActivity {
         if(getSupportActionBar() != null)
             this.getSupportActionBar().hide();
 
+        // Tempel fragment logo
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.logo_container, new LogoFragment());
+        ft.commit();
+
+        int waktu_loading = 3000; // 1000ms = 1s
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
