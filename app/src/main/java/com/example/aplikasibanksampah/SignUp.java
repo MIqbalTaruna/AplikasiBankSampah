@@ -9,12 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class Login extends AppCompatActivity {
+public class SignUp extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_up);
 
         if(getSupportActionBar() != null)
             this.getSupportActionBar().hide();
@@ -25,13 +25,13 @@ public class Login extends AppCompatActivity {
         ft.replace(R.id.logo_container, new LogoFragment());
         ft.commit();
 
-        // Link untuk register jika belum punya akun
-        TextView to_register = findViewById(R.id.text_daftar);
-        to_register.setOnClickListener(new View.OnClickListener() {
+        // Link ke halaman login
+        TextView to_login = findViewById(R.id.text_login);
+        to_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent register = new Intent(Login.this, SignUp.class);
-                startActivity(register);
+                Intent login = new Intent(SignUp.this, Login.class);
+                startActivity(login);
                 finish();
             }
         });
