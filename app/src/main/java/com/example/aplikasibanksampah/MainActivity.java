@@ -1,6 +1,8 @@
 package com.example.aplikasibanksampah;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -9,8 +11,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
     // creating constant keys for shared preferences.
@@ -26,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     String email, password;
 
-    Button btn_logout;
+    // Bottom Navigation
+    BottomNavigationView bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,22 +44,38 @@ public class MainActivity extends AppCompatActivity {
         if(getSupportActionBar() != null)
             this.getSupportActionBar().hide();
 
+        // Ambil variable shared preferences
         sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-
         email = sharedpreferences.getString(EMAIL_KEY, null);
         password = sharedpreferences.getString(PASSWORD_KEY, null);
 
-        btn_logout = findViewById(R.id.id_btn_logout);
+        // Bottom navigation
+        bottomNavigation = findViewById(R.id.bottom_nav);
 
-        btn_logout.setOnClickListener(new View.OnClickListener() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+
+        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.clear();
-                editor.apply();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selectedFragment = null;
 
-                startActivity(new Intent(MainActivity.this, SplashScreen.class));
-                finish();
+                switch (item.getItemId()){
+                    case R.id.nav_home:
+                        selectedFragment = new HomeFragment();
+                        Log.d("Fragment", "Ini Fragment Home");
+                        break;
+                    case R.id.nav_notif:
+                        selectedFragment = new NotificationsFragment();
+                        Log.d("Fragment", "Ini Fragment Notifikasi");
+                        break;
+                    case R.id.nav_profile:
+                        selectedFragment = new ProfileFragment();
+                        Log.d("Fragment", "Ini Fragment Profile");
+                        break;
+                }
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                return true;
             }
         });
     }
