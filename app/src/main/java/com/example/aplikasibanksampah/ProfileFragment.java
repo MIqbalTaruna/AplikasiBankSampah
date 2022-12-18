@@ -1,12 +1,23 @@
 package com.example.aplikasibanksampah;
 
+import static com.example.aplikasibanksampah.Login.EMAIL_KEY;
+import static com.example.aplikasibanksampah.Login.SHARED_PREFS;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +25,12 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
+
+    // variable for shared preferences.
+    SharedPreferences sharedpreferences;
+    String email;
+
+    Button btn_logout;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,12 +70,42 @@ public class ProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_profile, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Inflate the layout for this fragment
+        // getting the data which is stored in shard preferences
+        sharedpreferences = getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+
+        // in shared prefs inside the string method
+        // we are passing key value as EMAIL_KEY and
+        // default value is set to null
+        email = sharedpreferences.getString(EMAIL_KEY, null);
+
+        btn_logout = getView().findViewById(R.id.logout_button);
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.clear();
+                editor.apply();
+
+                Intent intent = new Intent(getActivity(), Login.class);
+                startActivity(intent);
+                requireActivity().finish();
+            }
+        });
     }
 }

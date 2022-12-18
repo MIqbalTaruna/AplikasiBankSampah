@@ -1,5 +1,8 @@
 package com.example.aplikasibanksampah;
 
+import static com.example.aplikasibanksampah.Login.EMAIL_KEY;
+import static com.example.aplikasibanksampah.Login.SHARED_PREFS;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -16,25 +19,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.aplikasibanksampah.utility.Server;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
-    // creating constant keys for shared preferences.
-    public static final String SHARED_PREFS = "shared_prefs";
-
-    // key for storing email.
-    public static final String EMAIL_KEY = "email_key";
-
-    // key for storing password.
-    public static final String PASSWORD_KEY = "password_key";
-
     // variable for shared preferences.
     SharedPreferences sharedpreferences;
-    String email, password;
+    String email;
 
     // Bottom Navigation
     BottomNavigationView bottomNavigation;
+
+    // Web Service
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +44,15 @@ public class MainActivity extends AppCompatActivity {
         // Ambil variable shared preferences
         sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         email = sharedpreferences.getString(EMAIL_KEY, null);
-        password = sharedpreferences.getString(PASSWORD_KEY, null);
+        Log.d("EMAIL_KEY", "" + email);
 
         // Bottom navigation
         bottomNavigation = findViewById(R.id.bottom_nav);
 
+        // fragment default yaitu home
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
 
+        // switch case untuk pindah fragment
         bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        if(email == null && password == null){
+        if(email == null){
             startActivity(new Intent(MainActivity.this, SplashScreen.class));
             finish();
         }

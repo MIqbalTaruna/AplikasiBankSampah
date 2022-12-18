@@ -4,18 +4,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.aplikasibanksampah.data.User;
+import com.example.aplikasibanksampah.data.controller.Pmob22Api;
+import com.example.aplikasibanksampah.utility.Server;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Login extends AppCompatActivity implements View.OnClickListener{
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class Login extends AppCompatActivity implements View.OnClickListener {
     FragmentManager fm;
     FragmentTransaction ft;
     TextView to_register;
@@ -25,22 +38,28 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     // creating constant keys for shared preferences.
     public static final String SHARED_PREFS = "shared_prefs";
 
-    // key for storing email.
+    // keys untuk shared preferences(session)
+    public static final String ID_KEY = "id_key";
+    public static final String NAMA_KEY = "name_key";
     public static final String EMAIL_KEY = "email_key";
-
-    // key for storing password.
-    public static final String PASSWORD_KEY = "password_key";
+    public static final String NO_TELP_KEY = "no_telp_key";
 
     // variable for shared preferences.
     SharedPreferences sharedpreferences;
     String email, password;
+
+    private static final String TAG = Login.class.getSimpleName();
+
+    // Web Service or API
+    Pmob22Api pmob22Api;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if(getSupportActionBar() != null)
+        if (getSupportActionBar() != null)
             this.getSupportActionBar().hide();
 
         // Tempel fragment logo
@@ -64,38 +83,85 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         // in shared prefs inside the string method
         // we are passing key value as EMAIL_KEY and
         // default value is set to null
-        email = sharedpreferences.getString(EMAIL_KEY, null);
-        password = sharedpreferences.getString(PASSWORD_KEY, null);
+        // email = sharedpreferences.getString(EMAIL_KEY, null);
+
+
+        // Retrofit
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Server.URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        pmob22Api = retrofit.create(Pmob22Api.class);
 
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.text_daftar:
-//                Intent intent = new Intent(Login.this, SignUp.class);
                 startActivity(new Intent(Login.this, SignUp.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 break;
             case R.id.id_btn_login:
                 // cek jika field kosong atau tidak
-                if(TextUtils.isEmpty(et_email.getText().toString()) && TextUtils.isEmpty(et_pass.getText().toString())){
+                if (TextUtils.isEmpty(et_email.getText().toString()) && TextUtils.isEmpty(et_pass.getText().toString())) {
                     // jika field kosong
                     Toast.makeText(Login.this, "Please Enter Email and Password", Toast.LENGTH_SHORT).show();
                 } else {
-                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    email = et_email.getText().toString();
+                    password = et_pass.getText().toString();
 
-                    // simpan email dan password ke shard preferences
-                    editor.putString(EMAIL_KEY, et_email.getText().toString());
-                    editor.putString(PASSWORD_KEY, et_pass.getText().toString());
-                    editor.apply();;
-
-                    // start new activity
-                    startActivity(new Intent(Login.this, MainActivity.class));
-                    finish();
+                    cekLogin(email, password);
                 }
                 break;
         }
+    }
+
+    private void cekLogin(String email, String password) {
+        Call<List<User>> call = pmob22Api.getUser("select.php", email, password);
+
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("Get user", "" + response.code());
+                    return;
+                }
+
+                List<User> users = response.body();
+
+                // jika user tidak ditemukan
+                if (users == null || users.size() < 1) {
+                    Log.d(TAG, "user tidak ditemukan");
+                    return;
+                }
+
+                // jika user ditemukan login berhasil
+                // simpan email dan password ke shared preferences
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+
+                for (User user : users) {
+                    editor.putString(ID_KEY, user.getId());
+                    editor.putString(NAMA_KEY, user.getNama());
+                    editor.putString(EMAIL_KEY, user.getEmail());
+                    editor.putString(NO_TELP_KEY, user.getNo_telp());
+
+                }
+                editor.apply();
+
+                // start new activity
+                // pindah ke main activity
+                startActivity(new Intent(Login.this, MainActivity.class));
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Toast.makeText(Login.this, "Email atau Password Salah", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Fail: " + t.getMessage());
+            }
+        });
     }
 }
