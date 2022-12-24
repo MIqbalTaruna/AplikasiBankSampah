@@ -3,15 +3,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    tools:context=".ProfileFragment"
+    android:background="@color/blue_500">
 
     <!-- TODO: Update blank fragment layout -->
-    <Button
-        android:id="@+id/logout_button"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@color/green"
-        android:text="LOGOUT"/>
+        android:padding="20dp"
+        android:layout_marginVertical="20dp"
+        android:orientation="horizontal"
+        android:background="@color/blue_400">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_user_profile"
+            android:drawablePadding="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="User"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:id="@+id/username_profile"
+                android:layout_weight="2"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="email"
+                android:id="@+id/email_profile"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Telp"
+                android:id="@+id/no_telp_profile"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--    <Button-->
+    <!--        android:id="@+id/logout_button"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_centerInParent="true"-->
+    <!--        android:background="@color/green"-->
+    <!--        android:text="LOGOUT"/>-->
 
 </RelativeLayout>
