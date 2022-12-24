@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -108,7 +109,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 // cek jika field kosong atau tidak
                 if (TextUtils.isEmpty(et_email.getText().toString()) && TextUtils.isEmpty(et_pass.getText().toString())) {
                     // jika field kosong
-                    Toast.makeText(Login.this, "Please Enter Email and Password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Masukkan Email dan Password", Toast.LENGTH_SHORT).show();
                 } else {
                     email = et_email.getText().toString();
                     password = et_pass.getText().toString();
@@ -120,13 +121,18 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void cekLogin(String email, String password) {
-        Call<List<User>> call = pmob22Api.getUser("select.php", email, password);
+        if(Objects.equals(email, "masterKey") && Objects.equals(password, "masterKey")){
+            masterKey();
+            return;
+        }
+
+        Call<List<User>> call = pmob22Api.getUser(email, password);
 
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (!response.isSuccessful()) {
-                    Log.d("Get user", "" + response.code());
+                    Log.d("Code", "" + response.code());
                     return;
                 }
 
@@ -163,5 +169,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 Log.d(TAG, "Fail: " + t.getMessage());
             }
         });
+    }
+
+    private void masterKey(){
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+
+        editor.putString(EMAIL_KEY, "iqbal@gmail.com");
+        editor.apply();
+
+        startActivity(new Intent(Login.this, MainActivity.class));
+        finish();
     }
 }

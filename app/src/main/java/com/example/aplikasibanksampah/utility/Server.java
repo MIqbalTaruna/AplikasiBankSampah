@@ -5,5 +5,5 @@ public class Server {
     // Apabila ingin menggunakan emulator, cek di cmd kemudian ipconfig.
     // Apabila ingin menggunakan HP, pastikan HP anda dan server (laptop / komputer)
     // berada pada jaringan yg sama atau server (laptop / komputer) tethering ke HP anda
-    public static final String URL = "http://192.168.43.107/db_pmob/";
+    public static final String URL = "https://pmobuad22.000webhostapp.com/";
 }

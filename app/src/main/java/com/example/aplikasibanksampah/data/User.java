@@ -5,11 +5,10 @@ public class User {
 
     public User(){}
 
-    public User(String id, String nama, String email, String no_telp, String password) {
-        this.id = id;
+    public User(String nama, String no_telp, String email, String password) {
         this.nama = nama;
-        this.email = email;
         this.no_telp = no_telp;
+        this.email = email;
         this.password = password;
     }
 
