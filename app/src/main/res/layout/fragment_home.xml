@@ -3,14 +3,173 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/home_header"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="32sp"
-        android:text="Ini Home" />
+        android:orientation="vertical"
+        android:background="@color/blue_500"
+        android:layout_marginBottom="20dp"
+        android:paddingHorizontal="30dp">
+
+        <FrameLayout
+            android:id="@+id/logo_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="30dp"/>
+
+        <TextView
+            android:id="@+id/hai_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hai, User"
+            android:textSize="22sp"
+            android:textColor="@color/white"
+            android:paddingVertical="10dp"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/home_header"
+        android:hint="Temukan Barang"
+        android:textSize="16sp"
+        android:inputType="text"
+        android:drawableStart="@drawable/ic__search"
+        android:drawablePadding="12dp"
+        android:background="@drawable/custom_input"
+        android:padding="10dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="20dp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/jual_beli"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search"
+        android:paddingHorizontal="30dp"
+        android:layout_marginBottom="50dp">
+
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:background="@drawable/rounded_corners"
+            android:textAlignment="center"
+            android:text="BELI"/>
+
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:background="@drawable/rounded_corners"
+            android:layout_alignParentEnd="true"
+            android:textAlignment="center"
+            android:text="JUAL"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/text_berita"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_below="@id/jual_beli"
+        android:text="Artikel Terbaru"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_berita"
+        android:paddingHorizontal="30dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/artikel_1"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:padding="10dp"
+                android:background="@drawable/rounded_corners"
+                android:layout_marginBottom="20dp">
+
+                <ImageView
+                    android:id="@+id/img_1"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/sadar_sampah"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/berita_1"
+                    android:layout_marginStart="10dp"
+                    android:textSize="16sp"
+                    android:layout_toRightOf="@id/img_1"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/artikel_2"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:padding="10dp"
+                android:background="@drawable/rounded_corners"
+                android:layout_below="@id/artikel_1"
+                android:layout_marginBottom="20dp">
+
+                <ImageView
+                    android:id="@+id/img_2"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/sampah_banjir"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/berita_2"
+                    android:layout_marginStart="10dp"
+                    android:textSize="16sp"
+                    android:layout_toRightOf="@id/img_2"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/artikel_3"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:padding="10dp"
+                android:background="@drawable/rounded_corners"
+                android:layout_below="@id/artikel_2"
+                android:layout_marginBottom="20dp">
+
+                <ImageView
+                    android:id="@+id/img_3"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/recycle"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/berita_3"
+                    android:layout_marginStart="10dp"
+                    android:textSize="16sp"
+                    android:layout_toRightOf="@id/img_3"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+
 
 </RelativeLayout>

@@ -1,12 +1,22 @@
 package com.example.aplikasibanksampah;
 
+import static com.example.aplikasibanksampah.Login.NAMA_KEY;
+import static com.example.aplikasibanksampah.Login.SHARED_PREFS;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +24,12 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+    FragmentManager fm;
+    FragmentTransaction ft;
+    SharedPreferences sharedpreferences;
+    String nama;
+
+    TextView haiNama;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,5 +76,23 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Tempel fragment logo
+        fm = getActivity().getSupportFragmentManager();
+        ft = fm.beginTransaction();
+        ft.replace(R.id.logo_container, new LogoFragment());
+        ft.commit();
+
+        sharedpreferences = getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        nama = sharedpreferences.getString(NAMA_KEY, null);
+
+        // Menampilkan text sapaan terhadap user
+        haiNama = getView().findViewById(R.id.hai_nama);
+        haiNama.setText("Hai, " + nama);
     }
 }
