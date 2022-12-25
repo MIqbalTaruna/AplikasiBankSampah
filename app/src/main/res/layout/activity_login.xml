@@ -12,33 +12,33 @@
         android:id="@+id/logo_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="40dp"/>
+        android:paddingVertical="40dp" />
 
     <LinearLayout
         android:id="@+id/inner_linear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/logo_container"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp"
-        android:orientation="horizontal"
-        android:layout_below="@id/logo_container">
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:text="Belum mendaftar?"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:layout_marginRight="10dp"
-            />
+            android:textSize="16sp" />
+
         <TextView
             android:id="@+id/text_daftar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Buat akun baru"
-            android:textSize="16sp"
-            android:textStyle="bold"
             android:textColor="@color/blue_500"
-            />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -46,55 +46,66 @@
         android:id="@+id/input_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
         android:layout_below="@id/inner_linear"
-        android:hint="Email"
-        android:textSize="16sp"
-        android:inputType="textEmailAddress"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/custom_input"
         android:drawableStart="@drawable/custom_email_icon"
         android:drawablePadding="12dp"
-        android:background="@drawable/custom_input"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
         android:padding="10dp"
-        />
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/input_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
         android:layout_below="@id/input_email"
-        android:hint="Password"
-        android:textSize="16sp"
-        android:inputType="textPassword"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/custom_input"
         android:drawableStart="@drawable/custom_lock_icon"
         android:drawablePadding="12dp"
-        android:background="@drawable/custom_input"
+        android:hint="Password"
+        android:inputType="textPassword"
         android:padding="10dp"
-        />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/text_lupa_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/input_password"
         android:layout_centerHorizontal="true"
         android:text="Lupa kata sandi?"
-        android:textSize="16sp"
-        android:textStyle="bold"
         android:textColor="@color/blue_500"
-        android:layout_below="@id/input_password"
-        />
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/id_btn_login"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
-        android:backgroundTint="@color/green"
-        android:textSize="18sp"
-        android:text="LOGIN"
-        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/id_btn_login"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/green"
+            android:text="LOGIN"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/id_btn_regist"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/id_btn_login"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/gray"
+            android:text="REGISTRASI"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

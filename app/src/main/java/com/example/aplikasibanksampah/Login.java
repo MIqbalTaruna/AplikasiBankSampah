@@ -33,7 +33,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     FragmentManager fm;
     FragmentTransaction ft;
     TextView to_register;
-    Button btn_login;
+    Button btn_login, btn_regist;
     EditText et_email, et_pass;
 
     // creating constant keys for shared preferences.
@@ -72,11 +72,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         // inisialisasi komponen
         to_register = findViewById(R.id.text_daftar);
         btn_login = findViewById(R.id.id_btn_login);
+        btn_regist = findViewById(R.id.id_btn_regist);
         et_email = findViewById(R.id.input_email);
         et_pass = findViewById(R.id.input_password);
 
         to_register.setOnClickListener(this);
         btn_login.setOnClickListener(this);
+        btn_regist.setOnClickListener(this);
 
         // getting the data which is stored in shard preferences
         sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
@@ -101,6 +103,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.text_daftar:
+            case R.id.id_btn_regist:
                 startActivity(new Intent(Login.this, SignUp.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
@@ -121,7 +124,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void cekLogin(String email, String password) {
-        if(Objects.equals(email, "masterKey") && Objects.equals(password, "masterKey")){
+        if (Objects.equals(email, "masterKey") && Objects.equals(password, "masterKey")) {
             masterKey();
             return;
         }
@@ -171,7 +174,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         });
     }
 
-    private void masterKey(){
+    private void masterKey() {
         SharedPreferences.Editor editor = sharedpreferences.edit();
 
         editor.putString(EMAIL_KEY, "iqbal@gmail.com");

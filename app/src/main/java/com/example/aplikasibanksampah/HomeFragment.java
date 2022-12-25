@@ -83,16 +83,16 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Tempel fragment logo
-        fm = getActivity().getSupportFragmentManager();
+        fm = requireActivity().getSupportFragmentManager();
         ft = fm.beginTransaction();
         ft.replace(R.id.logo_container, new LogoFragment());
         ft.commit();
 
-        sharedpreferences = getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedpreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         nama = sharedpreferences.getString(NAMA_KEY, null);
 
         // Menampilkan text sapaan terhadap user
-        haiNama = getView().findViewById(R.id.hai_nama);
+        haiNama = requireView().findViewById(R.id.hai_nama);
         haiNama.setText("Hai, " + nama);
     }
 }

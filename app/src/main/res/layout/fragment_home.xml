@@ -10,112 +10,47 @@
         android:id="@+id/home_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/blue_500"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/rounded_bottom"
+        android:backgroundTint="@color/blue_500"
+        android:orientation="vertical"
         android:paddingHorizontal="30dp">
 
         <FrameLayout
             android:id="@+id/logo_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="30dp"/>
+            android:paddingVertical="30dp" />
 
         <TextView
             android:id="@+id/hai_nama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
             android:text="Hai, User"
-            android:textSize="22sp"
             android:textColor="@color/white"
-            android:paddingVertical="10dp"/>
+            android:textSize="22sp" />
     </LinearLayout>
 
     <EditText
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/home_header"
-        android:hint="Temukan Barang"
-        android:textSize="16sp"
-        android:inputType="text"
-        android:drawableStart="@drawable/ic__search"
-        android:drawablePadding="12dp"
-        android:background="@drawable/custom_input"
-        android:padding="10dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginBottom="20dp"
-        />
-
-    <RelativeLayout
-        android:id="@+id/jual_beli"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/search"
-        android:paddingHorizontal="30dp"
-        android:layout_marginBottom="50dp">
-
-        <LinearLayout
-            android:layout_width="160dp"
-            android:layout_height="190dp"
-            android:orientation="vertical"
-            android:background="@drawable/rounded_corners">
-
-            <ImageView
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:src="@drawable/beli_sampah"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:text="BELI"/>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="160dp"
-            android:layout_height="190dp"
-            android:orientation="vertical"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/rounded_corners">
-
-            <ImageView
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:src="@drawable/jual_sampah"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:text="JUAL"/>
-
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/text_berita"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_below="@id/jual_beli"
-        android:text="Artikel Terbaru"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:layout_marginBottom="20dp"/>
+        android:layout_below="@id/home_header"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic__search"
+        android:drawablePadding="12dp"
+        android:hint="Temukan Barang"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textSize="16sp" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_berita"
+        android:layout_below="@id/search"
         android:paddingHorizontal="30dp">
 
         <RelativeLayout
@@ -123,77 +58,138 @@
             android:layout_height="wrap_content">
 
             <RelativeLayout
+                android:id="@+id/jual_beli"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp">
+
+                <LinearLayout
+                    android:layout_width="160dp"
+                    android:layout_height="190dp"
+                    android:background="@drawable/rounded_corners"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
+                        android:src="@drawable/beli_sampah" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="BELI"
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="160dp"
+                    android:layout_height="190dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/rounded_corners"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
+                        android:src="@drawable/jual_sampah" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="JUAL"
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/text_berita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/jual_beli"
+                android:layout_marginBottom="20dp"
+                android:text="Artikel Terbaru"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
                 android:id="@+id/artikel_1"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:padding="10dp"
+                android:layout_below="@id/text_berita"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/rounded_corners"
-                android:layout_marginBottom="20dp">
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/img_1"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/sadar_sampah"/>
+
+                    android:src="@drawable/sadar_sampah" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/berita_1"
                     android:layout_marginStart="10dp"
-                    android:textSize="16sp"
                     android:layout_toRightOf="@id/img_1"
-                    />
+                    android:text="@string/berita_1"
+                    android:textSize="16sp" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/artikel_2"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:padding="10dp"
-                android:background="@drawable/rounded_corners"
                 android:layout_below="@id/artikel_1"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_corners"
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/img_2"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/sampah_banjir"/>
+                    android:src="@drawable/sampah_banjir" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/berita_2"
                     android:layout_marginStart="10dp"
-                    android:textSize="16sp"
                     android:layout_toRightOf="@id/img_2"
-                    />
+                    android:text="@string/berita_2"
+                    android:textSize="16sp" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/artikel_3"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:padding="10dp"
-                android:background="@drawable/rounded_corners"
                 android:layout_below="@id/artikel_2"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_corners"
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/img_3"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/recycle"/>
+                    android:src="@drawable/recycle" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/berita_3"
                     android:layout_marginStart="10dp"
-                    android:textSize="16sp"
                     android:layout_toRightOf="@id/img_3"
-                    />
+                    android:text="@string/berita_3"
+                    android:textSize="16sp" />
             </RelativeLayout>
         </RelativeLayout>
 
