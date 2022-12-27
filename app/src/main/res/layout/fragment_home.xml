@@ -64,6 +64,7 @@
                 android:layout_marginBottom="50dp">
 
                 <LinearLayout
+                    android:id="@+id/beli_sampah"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:background="@drawable/rounded_corners"

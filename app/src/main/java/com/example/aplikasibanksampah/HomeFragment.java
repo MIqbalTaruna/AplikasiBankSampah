@@ -4,6 +4,7 @@ import static com.example.aplikasibanksampah.Login.NAMA_KEY;
 import static com.example.aplikasibanksampah.Login.SHARED_PREFS;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -16,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -28,6 +30,7 @@ public class HomeFragment extends Fragment {
     FragmentTransaction ft;
     SharedPreferences sharedpreferences;
     String nama;
+    LinearLayout beli_sampah;
 
     TextView haiNama;
 
@@ -94,5 +97,17 @@ public class HomeFragment extends Fragment {
         // Menampilkan text sapaan terhadap user
         haiNama = requireView().findViewById(R.id.hai_nama);
         haiNama.setText("Hai, " + nama);
+
+        // menambah button untuk beli barang
+        beli_sampah = requireView().findViewById(R.id.beli_sampah);
+        beli_sampah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Kategori.class);
+                startActivity(intent);
+                requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                requireActivity().finish();
+            }
+        });
     }
 }

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Kategori">
+
+    <RelativeLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:backgroundTint="@color/blue_500"
+        android:background="@drawable/rounded_bottom"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:id="@+id/arrow_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_left"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PILIH KATEGORI"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/kategori_grup_1"
+        android:layout_below="@id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="30dp">
+
+        <LinearLayout
+            android:id="@+id/e_waste"
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:background="@drawable/rounded_corners">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:src="@drawable/e_waste"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ELEKTRONIK"
+                android:textAlignment="center"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cloth_waste"
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:background="@drawable/rounded_corners"
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:src="@drawable/cloth_waste"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="KAIN"
+                android:textAlignment="center"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/kategori_grup_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp">
+
+        <LinearLayout
+            android:id="@+id/metal_waste"
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:background="@drawable/rounded_corners">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:src="@drawable/metal_waste"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LOGAM"
+                android:textAlignment="center"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/plastic_waste"
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:background="@drawable/rounded_corners"
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:src="@drawable/plastic_waste"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PLASTIK"
+                android:textAlignment="center"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
