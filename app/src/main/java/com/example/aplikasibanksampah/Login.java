@@ -124,10 +124,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void cekLogin(String email, String password) {
-        if (Objects.equals(email, "masterKey") && Objects.equals(password, "masterKey")) {
-            masterKey();
-            return;
-        }
 
         Call<List<User>> call = pmob22Api.getUser(email, password);
 
@@ -172,15 +168,5 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 Log.d(TAG, "Fail: " + t.getMessage());
             }
         });
-    }
-
-    private void masterKey() {
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-
-        editor.putString(EMAIL_KEY, "iqbal@gmail.com");
-        editor.apply();
-
-        startActivity(new Intent(Login.this, MainActivity.class));
-        finish();
     }
 }
