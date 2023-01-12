@@ -50,10 +50,11 @@
                         android:text="harga: ??"/>
 
                     <Button
+                        android:id="@+id/btn_detail_barang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/harga_sampah"
-                        android:text="Detail"
+                        android:text="BELI"
                         android:backgroundTint="@color/green"/>
                 </RelativeLayout>
             </LinearLayout>

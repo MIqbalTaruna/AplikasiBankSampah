@@ -3,14 +3,17 @@ package com.example.aplikasibanksampah;
 import static com.example.aplikasibanksampah.Kategori.KATEGORI_KEY;
 import static com.example.aplikasibanksampah.Login.ID_KEY;
 import static com.example.aplikasibanksampah.Login.SHARED_PREFS;
+import static com.example.aplikasibanksampah.utility.Server.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,6 +25,8 @@ import com.example.aplikasibanksampah.data.controller.Pmob22Api;
 import com.example.aplikasibanksampah.utility.Server;
 
 import java.util.List;
+
+import javax.xml.transform.sax.SAXTransformerFactory;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +43,10 @@ public class DaftarBarang extends AppCompatActivity {
     String id_user, id_kategori;
 
     LinearLayout linearLayout;
+
+    ImageView arrowBack;
+
+    Button btnBeliBarang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +73,16 @@ public class DaftarBarang extends AppCompatActivity {
 
         // Tampilkan daftar barang sesuai kategori
         showBarang(id_user, id_kategori);
+
+        arrowBack= findViewById(R.id.arrow_left);
+        arrowBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
     }
 
     private void showBarang(String id_pemilik, String id_kategori){
@@ -99,6 +118,30 @@ public class DaftarBarang extends AppCompatActivity {
                             .centerCrop()
                             .placeholder(R.drawable.ic_launcher_foreground)
                             .into(gambar_sampah);
+
+                    String sId = barang.getId();
+                    String sIdPemilik = barang.getId_pemilik();
+                    String sIdKategori = barang.getId_kategori();
+                    String sNama = barang.getNama_barang();
+                    String sHarga = barang.getHarga();
+                    String sDeskripsi = barang.getDeskripsi();
+
+                    btnBeliBarang = view.findViewById(R.id.btn_detail_barang);
+                    btnBeliBarang.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(DaftarBarang.this, BeliBarangActivity.class);
+
+                            intent.putExtra(ID_BARANG_KEY, sId);
+                            intent.putExtra(ID_PEMILIK_KEY, sIdPemilik);
+                            intent.putExtra(ID_KATEGORI_KEY, sIdKategori);
+                            intent.putExtra(NAMA_BARANG_KEY, sNama);
+                            intent.putExtra(HARGA_KEY, sHarga);
+                            intent.putExtra(DESKRIPSI_KEY, sDeskripsi);
+
+                            startActivity(intent);
+                        }
+                    });
 
                     linearLayout.addView(view);
                 }
