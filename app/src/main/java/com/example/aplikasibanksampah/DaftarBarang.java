@@ -119,7 +119,7 @@ public class DaftarBarang extends AppCompatActivity {
                             .placeholder(R.drawable.ic_launcher_foreground)
                             .into(gambar_sampah);
 
-                    String sId = barang.getId();
+                    String sIdBarang = barang.getId();
                     String sIdPemilik = barang.getId_pemilik();
                     String sIdKategori = barang.getId_kategori();
                     String sNama = barang.getNama_barang();
@@ -132,7 +132,7 @@ public class DaftarBarang extends AppCompatActivity {
                         public void onClick(View view) {
                             Intent intent = new Intent(DaftarBarang.this, BeliBarangActivity.class);
 
-                            intent.putExtra(ID_BARANG_KEY, sId);
+                            intent.putExtra(ID_BARANG_KEY, sIdBarang);
                             intent.putExtra(ID_PEMILIK_KEY, sIdPemilik);
                             intent.putExtra(ID_KATEGORI_KEY, sIdKategori);
                             intent.putExtra(NAMA_BARANG_KEY, sNama);

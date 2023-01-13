@@ -106,6 +106,30 @@
             android:layout_marginBottom="20dp"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Lokasi Pengantaran"
+            android:textColor="@color/blue_500"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btn_lokasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lokasi saya"/>
+
+        <TextView
+            android:id="@+id/text_alamat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alamat: -"
+            android:textColor="@color/blue_500"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
             android:id="@+id/total_tagihan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,21 +137,33 @@
             android:textSize="20sp"
             android:textColor="@color/green"/>
 
-        <Button
-            android:id="@+id/btn_hitung_tagihan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Hitung Tagihan"
-            android:backgroundTint="@android:color/darker_gray"/>
 
-        <Button
-            android:id="@+id/btn_beli"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="beli barang"
-            android:backgroundTint="@color/green"/>
+            android:orientation="horizontal"
+            android:weightSum="1.0">
+
+            <Button
+                android:id="@+id/btn_hitung_tagihan"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:text="Hitung Tagihan"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="@android:color/darker_gray"/>
+
+            <Button
+                android:id="@+id/btn_beli"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:text="beli barang"
+                android:backgroundTint="@color/green"/>
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 

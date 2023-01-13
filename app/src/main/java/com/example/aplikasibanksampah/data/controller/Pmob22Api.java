@@ -1,6 +1,7 @@
 package com.example.aplikasibanksampah.data.controller;
 
 import com.example.aplikasibanksampah.data.Barang;
+import com.example.aplikasibanksampah.data.Pesanan;
 import com.example.aplikasibanksampah.data.User;
 
 import java.util.List;
@@ -41,5 +42,16 @@ public interface Pmob22Api {
     Call<List<Barang>> getBarang(
             @Query("id_pemilik") String id_pemilik,
             @Query("id_kategori") String id_kategori
+    );
+
+    @FormUrlEncoded
+    @POST("user/input_pesanan.php")
+    Call<Pesanan> createPesanan(
+            @Field("id_barang") String id_barang,
+            @Field("id_pemesan") String id_pemesan,
+            @Field("jumlah") String jumlah,
+            @Field("total_harga") String total_harga,
+            @Field("loc_lat") String loc_lat,
+            @Field("loc_long") String loc_long
     );
 }
