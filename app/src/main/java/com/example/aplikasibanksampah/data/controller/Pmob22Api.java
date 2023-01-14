@@ -54,4 +54,7 @@ public interface Pmob22Api {
             @Field("loc_lat") String loc_lat,
             @Field("loc_long") String loc_long
     );
+
+    @GET("user/pesanan.php")
+    Call<List<Pesanan>> getPesanan(@Query("id_pemilik") String id_pemilik);
 }

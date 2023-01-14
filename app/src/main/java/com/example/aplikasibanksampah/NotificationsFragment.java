@@ -1,12 +1,33 @@
 package com.example.aplikasibanksampah;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.aplikasibanksampah.data.Pesanan;
+import com.example.aplikasibanksampah.data.controller.Pmob22Api;
+import com.example.aplikasibanksampah.utility.Server;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +35,12 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class NotificationsFragment extends Fragment {
+    Pmob22Api pmob22Api;
+
+    LinearLayout linearLayout;
+
+    SharedPreferences sharedPreferences;
+    String sIdUser;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,5 +87,71 @@ public class NotificationsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_notifications, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        sharedPreferences = requireActivity().getSharedPreferences(Login.SHARED_PREFS, Context.MODE_PRIVATE);
+        sIdUser = sharedPreferences.getString(Login.ID_KEY, "");
+
+        // Retrofit
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Server.URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        pmob22Api = retrofit.create(Pmob22Api.class);
+
+        linearLayout = requireView().findViewById(R.id.container_daftar_pesanan);
+
+        Call<List<Pesanan>> call = pmob22Api.getPesanan(sIdUser);
+
+        call.enqueue(new Callback<List<Pesanan>>() {
+            @Override
+            public void onResponse(Call<List<Pesanan>> call, Response<List<Pesanan>> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("Code", "" + response.code());
+                    return;
+                }
+                List<Pesanan> pesananList = response.body();
+
+                for(Pesanan pesanan : pesananList){
+                    View view = getLayoutInflater().inflate(R.layout.card_pesanan, null);
+
+                    TextView textNamaBarang = view.findViewById(R.id.nama_barang);
+                    TextView textNamaPemesan = view.findViewById(R.id.pembeli);
+                    TextView textJumlah = view.findViewById(R.id.jumlah);
+                    TextView textTagihan = view.findViewById(R.id.tagihan);
+                    Button btnCekLokasi = view.findViewById(R.id.btn_cek_lokasi);
+
+                    String strPembeli = "Nama Pembeli: " + pesanan.getNama_pemesan();
+                    String strJumlah = "Jumlah: " + pesanan.getJumlah();
+                    String strTagihan = "Tagihan: Rp. " + pesanan.getTotal_harga();
+
+                    textNamaBarang.setText(pesanan.getNama_barang());
+                    textNamaPemesan.setText(strPembeli);
+                    textJumlah.setText(strJumlah);
+                    textTagihan.setText(strTagihan);
+
+                    btnCekLokasi.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(getActivity(), "ID Pesanan: " + pesanan.getId(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    linearLayout.addView(view);
+
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<List<Pesanan>> call, Throwable t) {
+                Log.d("API FAIL", "" + t.getMessage());
+            }
+        });
     }
 }
