@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
                         selectedFragment = new ProfileFragment();
                         Log.d("Fragment", "Ini Fragment Profile");
                         break;
+                    case R.id.nav_items:
+                        selectedFragment = new MyItemsFragment();
+                        break;
                 }
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();

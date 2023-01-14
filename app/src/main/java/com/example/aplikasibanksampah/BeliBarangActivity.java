@@ -222,7 +222,9 @@ public class BeliBarangActivity extends AppCompatActivity implements LocationLis
             List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
             String address = addresses.get(0).getAddressLine(0);
 
-            textAlamat.setText(address);
+            String strAlamat = "Alamat: " + address;
+
+            textAlamat.setText(strAlamat);
         } catch (Exception e){
             e.printStackTrace();
         }

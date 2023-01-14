@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 
 public class Kategori extends AppCompatActivity implements View.OnClickListener{
     ImageView arrow_left;
-    LinearLayout kategori_cloth, kategori_ewaste;
+    LinearLayout kategori_cloth, kategori_ewaste, kategori_logam, kategori_plastik;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -39,9 +39,13 @@ public class Kategori extends AppCompatActivity implements View.OnClickListener{
         // tombol untuk menampilkan daftar barang sesuai kategori
         kategori_cloth = findViewById(R.id.cloth_waste);
         kategori_ewaste = findViewById(R.id.e_waste);
+        kategori_logam = findViewById(R.id.metal_waste);
+        kategori_plastik = findViewById(R.id.plastic_waste);
 
         kategori_cloth.setOnClickListener(this);
         kategori_ewaste.setOnClickListener(this);
+        kategori_logam.setOnClickListener(this);
+        kategori_plastik.setOnClickListener(this);
 
     }
 
@@ -61,6 +65,16 @@ public class Kategori extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.e_waste:
                 editor.putString(KATEGORI_KEY, "1"); // 1 adalah id_kategori untuk sampah elektronik
+                editor.commit();
+                startActivity(new Intent(Kategori.this, DaftarBarang.class));
+                break;
+            case R.id.metal_waste:
+                editor.putString(KATEGORI_KEY, "3");
+                editor.commit();
+                startActivity(new Intent(Kategori.this, DaftarBarang.class));
+                break;
+            case R.id.plastic_waste:
+                editor.putString(KATEGORI_KEY, "4");
                 editor.commit();
                 startActivity(new Intent(Kategori.this, DaftarBarang.class));
                 break;

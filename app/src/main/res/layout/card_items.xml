@@ -47,12 +47,12 @@
                     android:textSize="14sp" />
 
                 <Button
-                    android:id="@+id/btn_detail_barang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Hapus"
                     android:layout_below="@id/harga_sampah"
-                    android:backgroundTint="@color/green"
-                    android:text="BELI" />
+                    android:backgroundTint="@color/red"
+                    android:id="@+id/btn_hapus"/>
             </RelativeLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

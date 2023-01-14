@@ -111,7 +111,6 @@ public class DaftarBarang extends AppCompatActivity {
 
                     // ambil gambar dari website
                     String url_gambar = Server.URL + "img/" + barang.getGambar();
-                    Log.d("Gambar Barang", url_gambar);
 
                     Glide.with(DaftarBarang.this)
                             .load(url_gambar)

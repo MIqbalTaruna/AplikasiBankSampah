@@ -13,4 +13,6 @@ public class Server {
     public static final String NAMA_BARANG_KEY = "nama_barang_key";
     public static final String HARGA_KEY = "harga_key";
     public static final String DESKRIPSI_KEY = "deskripsi_key";
+    public static final String LATITUDE_KEY = "latitude_key";
+    public static final String LONGITUDE_KEY = "longitude_key";
 }

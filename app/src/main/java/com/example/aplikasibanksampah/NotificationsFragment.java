@@ -1,6 +1,7 @@
 package com.example.aplikasibanksampah;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -129,6 +130,8 @@ public class NotificationsFragment extends Fragment {
                     String strPembeli = "Nama Pembeli: " + pesanan.getNama_pemesan();
                     String strJumlah = "Jumlah: " + pesanan.getJumlah();
                     String strTagihan = "Tagihan: Rp. " + pesanan.getTotal_harga();
+                    String latitude = pesanan.getLoc_lat();
+                    String longitude = pesanan.getLoc_long();
 
                     textNamaBarang.setText(pesanan.getNama_barang());
                     textNamaPemesan.setText(strPembeli);
@@ -139,6 +142,11 @@ public class NotificationsFragment extends Fragment {
                         @Override
                         public void onClick(View view) {
                             Toast.makeText(getActivity(), "ID Pesanan: " + pesanan.getId(), Toast.LENGTH_SHORT).show();
+                            Intent map = new Intent(getActivity(), MapsActivity.class);
+
+                            map.putExtra(Server.LATITUDE_KEY, latitude);
+                            map.putExtra(Server.LONGITUDE_KEY, longitude);
+                            startActivity(map);
                         }
                     });
 
@@ -146,7 +154,6 @@ public class NotificationsFragment extends Fragment {
 
                 }
             }
-
 
             @Override
             public void onFailure(Call<List<Pesanan>> call, Throwable t) {

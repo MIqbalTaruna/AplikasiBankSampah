@@ -57,4 +57,10 @@ public interface Pmob22Api {
 
     @GET("user/pesanan.php")
     Call<List<Pesanan>> getPesanan(@Query("id_pemilik") String id_pemilik);
+
+    @GET("user/show_barang.php")
+    Call<List<Barang>> getAllBarang(@Query("id") String id_pemilik);
+
+    @GET("user/hapus_barang.php")
+    Call<Barang> deleteBarang(@Query("id_barang") String id_barang);
 }

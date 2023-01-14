@@ -34,8 +34,6 @@
         android:layout_below="@id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingVertical="20dp"
-        android:paddingHorizontal="30dp"
         android:scrollbars="none">
 
         <LinearLayout
