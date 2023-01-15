@@ -7,4 +7,11 @@
     <string name="berita_2">Urusan Sampah di Jakarta Disebut Akan Terus Jadi Masalah</string>
     <string name="berita_3">Recycle Adalah: Manfaat, Contoh, dan Cara Melakukannya</string>
     <string name="title_activity_maps">MapsActivity</string>
+
+    <string-array name="kategori">
+        <item>Elektronik</item>
+        <item>Kain</item>
+        <item>Logam</item>
+        <item>Plastik</item>
+    </string-array>
 </resources>

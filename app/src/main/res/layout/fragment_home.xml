@@ -87,6 +87,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/jual_sampah"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:layout_alignParentEnd="true"

@@ -55,6 +55,16 @@ public interface Pmob22Api {
             @Field("loc_long") String loc_long
     );
 
+    @FormUrlEncoded
+    @POST("user/input_barang.php")
+    Call<Barang> createBarang(
+            @Field("nama_barang") String namaBarang,
+            @Field("id_pemilik") String idPemilik,
+            @Field("kategori") String kategori,
+            @Field("harga") String harga,
+            @Field("deskripsi") String deskripsi
+    );
+
     @GET("user/pesanan.php")
     Call<List<Pesanan>> getPesanan(@Query("id_pemilik") String id_pemilik);
 

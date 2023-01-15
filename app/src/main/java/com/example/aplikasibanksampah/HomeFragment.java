@@ -30,7 +30,7 @@ public class HomeFragment extends Fragment {
     FragmentTransaction ft;
     SharedPreferences sharedpreferences;
     String nama;
-    LinearLayout beli_sampah;
+    LinearLayout beli_sampah, jual_sampah;
 
     TextView haiNama;
 
@@ -104,6 +104,18 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), Kategori.class);
+                startActivity(intent);
+                requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                requireActivity().finish();
+            }
+        });
+
+        // menambah button untuk jual barang
+        jual_sampah = requireView().findViewById(R.id.jual_sampah);
+        jual_sampah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TambahBarangActivity.class);
                 startActivity(intent);
                 requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 requireActivity().finish();
