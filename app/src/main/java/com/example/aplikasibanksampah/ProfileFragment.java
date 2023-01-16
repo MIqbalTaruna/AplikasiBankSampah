@@ -107,8 +107,7 @@ public class ProfileFragment extends Fragment {
         textEmail.setText(email);
         textNoTelp.setText(no_telp);
 
-        // button untuk logout sementara
-        btn_logout = getView().findViewById(R.id.logout_button);
+        btn_logout = requireView().findViewById(R.id.logout_button);
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

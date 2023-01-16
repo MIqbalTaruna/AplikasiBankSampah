@@ -61,18 +61,18 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.nav_home:
                         selectedFragment = new HomeFragment();
-                        Log.d("Fragment", "Ini Fragment Home");
                         break;
                     case R.id.nav_notif:
                         selectedFragment = new NotificationsFragment();
-                        Log.d("Fragment", "Ini Fragment Notifikasi");
                         break;
                     case R.id.nav_profile:
                         selectedFragment = new ProfileFragment();
-                        Log.d("Fragment", "Ini Fragment Profile");
                         break;
                     case R.id.nav_items:
                         selectedFragment = new MyItemsFragment();
+                        break;
+                    case R.id.nav_order:
+                        selectedFragment = new OrderFragment();
                         break;
                 }
 

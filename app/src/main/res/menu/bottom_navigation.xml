@@ -6,14 +6,19 @@
         android:title="Beranda"/>
 
     <item
-        android:id="@+id/nav_notif"
-        android:icon="@drawable/ic_notification"
-        android:title="Notifikasi"/>
+        android:id="@+id/nav_order"
+        android:icon="@drawable/ic_baseline_assignment_24"
+        android:title="Pesanan"/>
 
     <item
         android:id="@+id/nav_items"
         android:icon="@drawable/ic_baseline_format_list_bulleted_24"
-        android:title="Items"/>
+        android:title="Barang"/>
+
+    <item
+        android:id="@+id/nav_notif"
+        android:icon="@drawable/ic_notification"
+        android:title="Notifikasi"/>
 
     <item
         android:id="@+id/nav_profile"

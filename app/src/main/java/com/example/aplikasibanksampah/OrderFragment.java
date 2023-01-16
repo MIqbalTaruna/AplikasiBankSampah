@@ -1,7 +1,6 @@
 package com.example.aplikasibanksampah;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -13,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,16 +30,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link NotificationsFragment#newInstance} factory method to
+ * Use the {@link OrderFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NotificationsFragment extends Fragment {
+public class OrderFragment extends Fragment {
     Pmob22Api pmob22Api;
-
-    LinearLayout linearLayout;
-
     SharedPreferences sharedPreferences;
-    String sIdUser;
+    String id_user;
+    LinearLayout linearLayout;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,7 +48,7 @@ public class NotificationsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public NotificationsFragment() {
+    public OrderFragment() {
         // Required empty public constructor
     }
 
@@ -62,11 +58,11 @@ public class NotificationsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment NotificationsFragment.
+     * @return A new instance of fragment OrderFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static NotificationsFragment newInstance(String param1, String param2) {
-        NotificationsFragment fragment = new NotificationsFragment();
+    public static OrderFragment newInstance(String param1, String param2) {
+        OrderFragment fragment = new OrderFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -87,27 +83,27 @@ public class NotificationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notifications, container, false);
+        return inflater.inflate(R.layout.fragment_order, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // SharedPref
         sharedPreferences = requireActivity().getSharedPreferences(Login.SHARED_PREFS, Context.MODE_PRIVATE);
-        sIdUser = sharedPreferences.getString(Login.ID_KEY, "");
+        id_user = sharedPreferences.getString(Login.ID_KEY, "");
 
         // Retrofit
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Server.URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                .addConverterFactory(GsonConverterFactory.create()).build();
 
         pmob22Api = retrofit.create(Pmob22Api.class);
 
         linearLayout = requireView().findViewById(R.id.container_daftar_pesanan);
 
-        Call<List<Pesanan>> call = pmob22Api.getPesanan(sIdUser);
+        Call<List<Pesanan>> call = pmob22Api.getMyPesanan(id_user);
 
         call.enqueue(new Callback<List<Pesanan>>() {
             @Override
@@ -116,49 +112,30 @@ public class NotificationsFragment extends Fragment {
                     Log.d("Code", "" + response.code());
                     return;
                 }
+                
                 List<Pesanan> pesananList = response.body();
-
+                
                 for(Pesanan pesanan : pesananList){
-                    View view = getLayoutInflater().inflate(R.layout.card_pesanan, null);
-
+                    View view = getLayoutInflater().inflate(R.layout.card_my_pesanan, null);
+                    
                     TextView textNamaBarang = view.findViewById(R.id.nama_barang);
-                    TextView textNamaPemesan = view.findViewById(R.id.pembeli);
                     TextView textJumlah = view.findViewById(R.id.jumlah);
-                    TextView textTagihan = view.findViewById(R.id.tagihan);
-                    Button btnCekLokasi = view.findViewById(R.id.btn_cek_lokasi);
-
-                    String strPembeli = "Nama Pembeli: " + pesanan.getNama_pemesan();
+                    TextView textTotalHarga = view.findViewById(R.id.tagihan);
+                    
                     String strJumlah = "Jumlah: " + pesanan.getJumlah();
-                    String strTagihan = "Tagihan: Rp. " + pesanan.getTotal_harga();
-                    String latitude = pesanan.getLoc_lat();
-                    String longitude = pesanan.getLoc_long();
-
+                    String strTotalHarga = "Tagihan: Rp" + pesanan.getTotal_harga();
+                    
                     textNamaBarang.setText(pesanan.getNama_barang());
-                    textNamaPemesan.setText(strPembeli);
                     textJumlah.setText(strJumlah);
-                    textTagihan.setText(strTagihan);
-
-                    btnCekLokasi.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Toast.makeText(getActivity(), "ID Pesanan: " + pesanan.getId(), Toast.LENGTH_SHORT).show();
-                            Intent map = new Intent(getActivity(), MapsActivity.class);
-
-                            map.putExtra(Server.LATITUDE_KEY, latitude);
-                            map.putExtra(Server.LONGITUDE_KEY, longitude);
-                            startActivity(map);
-                        }
-                    });
-
+                    textTotalHarga.setText(strTotalHarga);
+                    
                     linearLayout.addView(view);
-
                 }
             }
 
             @Override
             public void onFailure(Call<List<Pesanan>> call, Throwable t) {
-                Log.d("API FAIL", "" + t.getMessage());
-                Toast.makeText(getActivity(), "Belum ada pesanan", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Belum melakukan pemesanan", Toast.LENGTH_SHORT).show();
             }
         });
     }
